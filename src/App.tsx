@@ -1,25 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {
+  Box,
+  createTheme,
+  CssBaseline,
+  Paper,
+  ThemeProvider,
+  Typography,
+} from "@mui/material";
 
 function App() {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        light: "#63b8ff",
+        main: "#0989e3",
+        dark: "#005db0",
+        contrastText: "#000",
+      },
+      secondary: {
+        main: "#4db6ac",
+        light: "#82e9de",
+        dark: "#00867d",
+        contrastText: "#000",
+      },
+    },
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box
+        height="100vh"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        flexDirection="column"
+      >
+        <Paper
+          elevation={3}
+          sx={{ padding: "1rem", backgroundColor: "secondary.light" }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Typography color="primary.dark" variant="h1">
+            Starter App
+          </Typography>
+        </Paper>
+      </Box>
+    </ThemeProvider>
   );
 }
 
