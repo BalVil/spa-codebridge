@@ -14,12 +14,9 @@ interface IItem {
 
 interface IProps {
   items: IItem[];
-  term: string;
 }
 
-const ArticleList: React.FC<IProps> = (props, term) => {
-  console.log(term);
-
+const ArticleList: React.FC<IProps> = props => {
   return (
     <Grid container spacing={{ mobile: 4, tablet: 6 }}>
       {props.items.map(({ id, imageUrl, publishedAt, title, summary, url }) => (
@@ -32,7 +29,6 @@ const ArticleList: React.FC<IProps> = (props, term) => {
           articleTitle={title}
           summary={summary}
           articleUrl={url}
-          term={term}
         />
       ))}
     </Grid>

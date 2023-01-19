@@ -56,19 +56,10 @@ type FormValues = {
 const Home: FC<any> = (): ReactElement => {
   const [articles, setArticles] = useState<any[] | null>();
   const [term, setTerm] = useState('');
-  console.log(term);
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  console.log(articles);
 
-  const {
-    handleSubmit,
-    control,
-    reset,
-    formState: { errors, isDirty, isValid },
-    watch,
-  } = useForm<FormValues>();
+  const { handleSubmit, control } = useForm<FormValues>();
 
   useEffect(() => {
     setLoading(true);
@@ -112,7 +103,6 @@ const Home: FC<any> = (): ReactElement => {
         setArticles(data);
         setLoading(false);
         Loading.remove();
-        // setArticles(null);
       })
       .catch(error => {
         Loading.remove();
@@ -122,12 +112,9 @@ const Home: FC<any> = (): ReactElement => {
       });
   };
 
-  // const watchIsDeveloper = watch("mo");
-
   return (
     <Box>
       <Container maxWidth={false} sx={{ px: '75px' }} disableGutters>
-        {/* {loading && <h3>Loading...</h3>} */}
         {error && <h3>Something went wrong.</h3>}
         <Box
           sx={{
@@ -179,8 +166,7 @@ const Home: FC<any> = (): ReactElement => {
           </Typography>
         </Box>
         <Box mt={6} mb={7}>
-          {/* {searchData?.length && <ArticleList items={searchData} />} */}
-          {articles && <ArticleList items={articles} term={term} />}
+          {articles && <ArticleList items={articles} />}
           {!articles?.length && !loading && (
             <Typography>Sorry, nothing was found</Typography>
           )}

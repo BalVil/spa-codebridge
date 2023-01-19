@@ -1,6 +1,5 @@
-import { ReactElement, FC, useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import { Box, Typography, Link, Icon } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import apiServices from 'services/spaceflight-api';
 
@@ -10,8 +9,14 @@ type QuizParams = {
   articleId: string;
 };
 
+interface ItemProps {
+  imageUrl: string;
+  title: string;
+  summary: string;
+}
+
 const Article = () => {
-  const [article, setArticle] = useState<any[] | null>();
+  const [article, setArticle] = useState<ItemProps | null>();
   const { articleId } = useParams<QuizParams>();
 
   useEffect(() => {
