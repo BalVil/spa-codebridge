@@ -55,7 +55,6 @@ type FormValues = {
 
 const Home: FC<any> = (): ReactElement => {
   const [articles, setArticles] = useState<any[] | null>();
-  const [term, setTerm] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -85,8 +84,6 @@ const Home: FC<any> = (): ReactElement => {
   }, []);
 
   const onSubmit = (term: FormValues) => {
-    setTerm(term?.SearchInput.trim());
-
     if (term.SearchInput.trim() === '') {
       console.log('Enter something');
       return;

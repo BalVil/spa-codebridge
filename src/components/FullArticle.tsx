@@ -35,7 +35,7 @@ function FullArticle({ item }: ItemProps) {
           </CardContent>
         </Card>
         <Link href="/" underline="hover" color="inherit">
-          <img src={LeftArrow} style={{ marginRight: '6px' }} />
+          <img src={LeftArrow} style={{ marginRight: '6px' }} alt="LeftArrow" />
           Back to homepage
         </Link>
       </Container>

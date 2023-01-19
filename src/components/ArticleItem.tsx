@@ -67,7 +67,6 @@ const ArticleItem: React.FC<IItemProp> = ({
         </CardActionArea>
         <CardActions sx={{ flexGrow: 1, alignItems: 'flex-end' }}>
           <Link
-            href="#multiple-actions"
             component={NavLink as any}
             to={`/${articleId}`}
             state={{ from: location }}
@@ -75,7 +74,11 @@ const ArticleItem: React.FC<IItemProp> = ({
             color="inherit"
           >
             Read more
-            <img src={RightArrow} style={{ marginLeft: '6px' }} />
+            <img
+              src={RightArrow}
+              style={{ marginLeft: '6px' }}
+              alt="RightArrow"
+            />
           </Link>
         </CardActions>
       </Card>
