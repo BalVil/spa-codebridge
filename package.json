@@ -14,11 +14,13 @@
     "@types/node": "^16.18.11",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
+    "@types/react-highlight-words": "^0.16.4",
     "axios": "^1.2.2",
     "date-fns": "^2.29.3",
     "notiflix": "^3.2.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-highlight-words": "^0.18.0",
     "react-hook-form": "^7.42.1",
     "react-router-dom": "^6.6.2",
     "react-scripts": "5.0.1",
@@ -29,7 +31,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint:js": "eslint src/**/*.{js,jsx}",
+    "predeploy": "npm run build",
+    "deploy": "netlify deploy -p"
   },
   "eslintConfig": {
     "extends": [

@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from 'react-router-dom';
 import {
   Grid,
   Card,
@@ -7,8 +7,10 @@ import {
   CardActions,
   Typography,
   Link,
-} from "@mui/material";
-import { format } from "date-fns";
+  CardActionArea,
+} from '@mui/material';
+import { format } from 'date-fns';
+import HighlightText from 'helpers/HighlightText/HighlightText';
 
 interface IItemProp {
   articleId: string;
@@ -17,6 +19,8 @@ interface IItemProp {
   date: Date | string;
   articleTitle: string;
   summary: string;
+  articleUrl: string;
+  term: string;
 }
 
 const ArticleItem: React.FC<IItemProp> = ({
@@ -26,41 +30,49 @@ const ArticleItem: React.FC<IItemProp> = ({
   date,
   articleTitle,
   summary,
+  articleUrl,
+  term,
 }) => {
   const location = useLocation();
   const MAX_TEXT_LENGTH = 100;
+  // console.log(typeof term);
+  // console.log(term);
 
   return (
     <Grid item mobile={12} tablet={6} desktop={4} display="flex">
-      <Card sx={{ display: "flex", flexDirection: "column" }}>
-        <CardMedia
-          sx={{ pt: 27 }}
-          image={
-            imageUrl ||
-            "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-          }
-          title={imageAlt}
-        />
-        <CardContent sx={{ flexGrow: "1" }}>
-          <Typography variant="caption">
-            {format(new Date(date.toString()), "MMMM do, yyyy")}
-          </Typography>
-          <Typography gutterBottom variant="h3" mt={3}>
-            {articleTitle}
-          </Typography>
-          <Typography variant="body1">
-            {summary.length > MAX_TEXT_LENGTH
-              ? `${summary
-                  .slice(0, MAX_TEXT_LENGTH)
-                  .split(" ")
-                  .slice(0, -1)
-                  .join(" ")}...`
-              : summary}
-          </Typography>
-        </CardContent>
-        <CardActions>
+      <Card sx={{ display: 'flex', flexDirection: 'column' }}>
+        <CardActionArea target="_blank" href={articleUrl}>
+          <CardMedia
+            sx={{ pt: 27 }}
+            image={
+              imageUrl ||
+              'https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg'
+            }
+            title={imageAlt}
+          />
+          <CardContent sx={{ flexGrow: '1' }}>
+            <Typography variant="caption">
+              {format(new Date(date.toString()), 'MMMM do, yyyy')}
+            </Typography>
+            <Typography gutterBottom variant="h3" mt={3}>
+              {/* <HighlightText result={articleTitle} query={term} /> */}
+              {/* {articleTitle} */}
+            </Typography>
+            <Typography variant="body1">
+              {summary.length > MAX_TEXT_LENGTH
+                ? `${summary
+                    .slice(0, MAX_TEXT_LENGTH)
+                    .split(' ')
+                    .slice(0, -1)
+                    .join(' ')}...`
+                : summary}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions sx={{ flexGrow: 1, alignItems: 'flex-end' }}>
           <Link
-            component={NavLink}
+            href="#multiple-actions"
+            component={NavLink as any}
             to={`/${articleId}`}
             state={{ from: location }}
             underline="hover"
