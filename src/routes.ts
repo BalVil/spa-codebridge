@@ -1,10 +1,10 @@
 // pages
-import Home from "./pages/Home";
-import Article from "./pages/Article";
-import NotFound from "./pages/NotFound";
+import Home from './pages/Home';
+import Article from './pages/Article';
+import NotFound from './pages/NotFound';
 
 // other
-import { FC } from "react";
+import { FC } from 'react';
 
 // interface
 interface Route {
@@ -12,28 +12,28 @@ interface Route {
   title: string;
   path: string;
   enabled: boolean;
-  component: FC<{}>;
+  component: FC<Record<string, never>>;
 }
 
 export const routes: Array<Route> = [
   {
-    key: "home-route",
-    title: "Home",
-    path: "/",
+    key: 'home-route',
+    title: 'Home',
+    path: '/',
     enabled: true,
     component: Home,
   },
   {
-    key: "article-route",
-    title: "Article",
-    path: "/:articleId",
+    key: 'article-route',
+    title: 'Article',
+    path: '/:articleId',
     enabled: true,
     component: Article,
   },
   {
-    key: "not-found",
-    title: "NotFound",
-    path: "*",
+    key: 'not-found',
+    title: 'NotFound',
+    path: '*',
     enabled: true,
     component: NotFound,
   },

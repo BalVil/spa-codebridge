@@ -1,8 +1,9 @@
-import { Box, CssBaseline, ThemeProvider } from "@mui/material";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React from 'react';
+import { Box, CssBaseline, ThemeProvider } from '@mui/material';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import { routes as appRoutes } from "./routes";
-import { theme } from "./theme";
+import { routes as appRoutes } from './routes';
+import { theme } from './theme';
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <Box height="100vh" display="flex" flexDirection="column">
         <Router>
           <Routes>
-            {appRoutes.map((route) => (
+            {appRoutes.map(route => (
               <Route
                 key={route.key}
                 path={route.path}

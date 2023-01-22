@@ -1,4 +1,4 @@
-import { ReactElement, FC, useState, useEffect } from 'react';
+import React, { ReactElement, FC, useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import {
   Box,
@@ -57,6 +57,8 @@ const Home: FC<any> = (): ReactElement => {
   const [articles, setArticles] = useState<any[] | null>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [searchData, setSearchData] = useState<any[] | null>();
+  console.log(searchData);
 
   const { handleSubmit, control } = useForm<FormValues>();
 
@@ -95,9 +97,19 @@ const Home: FC<any> = (): ReactElement => {
     });
 
     apiServices
-      .getArticles(term.SearchInput)
-      .then(data => {
-        setArticles(data);
+      .getSearchArticles(term.SearchInput)
+      .then(([arr1, arr2]) => {
+        console.log(arr1);
+        console.log(arr2);
+        const titleArr = [...arr1.data];
+        const summaryArr = [...arr2.data];
+
+        const result = [...titleArr, ...summaryArr].filter(
+          (value, index, self) =>
+            index === self.findIndex(t => t.id === value.id)
+        );
+
+        setSearchData(result);
         setLoading(false);
         Loading.remove();
       })
@@ -159,12 +171,16 @@ const Home: FC<any> = (): ReactElement => {
           </SearchForm>
 
           <Typography variant="subtitle1" component="p" sx={{ pb: '5px' }}>
-            Results: {articles ? articles.length : 0}
+            Results: {searchData ? searchData.length : 0}
           </Typography>
         </Box>
         <Box mt={6} mb={7}>
-          {articles && <ArticleList items={articles} />}
-          {!articles?.length && !loading && (
+          {searchData ? (
+            <ArticleList items={searchData} />
+          ) : (
+            <ArticleList items={articles} />
+          )}
+          {!searchData?.length && !loading && (
             <Typography>Sorry, nothing was found</Typography>
           )}
         </Box>

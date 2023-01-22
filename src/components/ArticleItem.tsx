@@ -1,3 +1,4 @@
+import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
   Grid,
@@ -67,7 +68,7 @@ const ArticleItem: React.FC<IItemProp> = ({
         </CardActionArea>
         <CardActions sx={{ flexGrow: 1, alignItems: 'flex-end' }}>
           <Link
-            component={NavLink as any}
+            component={NavLink}
             to={`/${articleId}`}
             state={{ from: location }}
             underline="hover"
