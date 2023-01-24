@@ -14,25 +14,26 @@ interface IItem {
 
 interface IProps {
   items: IItem[] | null | undefined;
+  term?: string | undefined;
 }
 
-const ArticleList: React.FC<IProps> = props => {
+const ArticleList: React.FC<IProps> = ({ items, term }) => {
+  const termValue = term;
   return (
     <Grid container spacing={{ mobile: 4, tablet: 6 }}>
-      {props.items?.map(
-        ({ id, imageUrl, publishedAt, title, summary, url }) => (
-          <ArticleItem
-            key={id}
-            articleId={id}
-            imageUrl={imageUrl}
-            imageAlt={title}
-            date={publishedAt}
-            articleTitle={title}
-            summary={summary}
-            articleUrl={url}
-          />
-        )
-      )}
+      {items?.map(({ id, imageUrl, publishedAt, title, summary, url }) => (
+        <ArticleItem
+          key={id}
+          articleId={id}
+          imageUrl={imageUrl}
+          imageAlt={title}
+          date={publishedAt}
+          articleTitle={title}
+          summary={summary}
+          articleUrl={url}
+          termValue={termValue}
+        />
+      ))}
     </Grid>
   );
 };

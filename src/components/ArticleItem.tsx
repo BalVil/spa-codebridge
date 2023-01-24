@@ -12,6 +12,8 @@ import {
 } from '@mui/material';
 import { format } from 'date-fns';
 
+import HighlightText from 'helpers/HighlightText';
+import getShortenedText from 'helpers/shortenText';
 import RightArrow from '../assets/right-arrow.svg';
 
 interface IItemProp {
@@ -22,6 +24,7 @@ interface IItemProp {
   articleTitle: string;
   summary: string;
   articleUrl: string;
+  termValue: string | undefined;
 }
 
 const ArticleItem: React.FC<IItemProp> = ({
@@ -32,9 +35,11 @@ const ArticleItem: React.FC<IItemProp> = ({
   articleTitle,
   summary,
   articleUrl,
+  termValue,
 }) => {
   const location = useLocation();
-  const MAX_TEXT_LENGTH = 100;
+
+  const shortenedText = getShortenedText(summary);
 
   return (
     <Grid item mobile={12} tablet={6} desktop={4} display="flex">
@@ -53,16 +58,10 @@ const ArticleItem: React.FC<IItemProp> = ({
               {format(new Date(date.toString()), 'MMMM do, yyyy')}
             </Typography>
             <Typography gutterBottom variant="h3" mt={3}>
-              {articleTitle}
+              <HighlightText result={articleTitle} query={termValue} />
             </Typography>
             <Typography variant="body1">
-              {summary.length > MAX_TEXT_LENGTH
-                ? `${summary
-                    .slice(0, MAX_TEXT_LENGTH)
-                    .split(' ')
-                    .slice(0, -1)
-                    .join(' ')}...`
-                : summary}
+              <HighlightText result={shortenedText} query={termValue} />
             </Typography>
           </CardContent>
         </CardActionArea>

@@ -58,7 +58,8 @@ const Home: FC<any> = (): ReactElement => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [searchData, setSearchData] = useState<any[] | null>();
-  console.log(searchData);
+  const [term, setTerm] = useState('');
+  console.log(term);
 
   const { handleSubmit, control } = useForm<FormValues>();
 
@@ -86,10 +87,12 @@ const Home: FC<any> = (): ReactElement => {
   }, []);
 
   const onSubmit = (term: FormValues) => {
-    if (term.SearchInput.trim() === '') {
+    const searchTerm = term.SearchInput.trim();
+    if (searchTerm === '') {
       console.log('Enter something');
       return;
     }
+    setTerm(searchTerm);
 
     Loading.arrows({
       svgColor: '#f59256',
@@ -176,11 +179,11 @@ const Home: FC<any> = (): ReactElement => {
         </Box>
         <Box mt={6} mb={7}>
           {searchData ? (
-            <ArticleList items={searchData} />
+            <ArticleList items={searchData} term={term} />
           ) : (
             <ArticleList items={articles} />
           )}
-          {!searchData?.length && !loading && (
+          {!searchData?.length && !articles && !loading && (
             <Typography>Sorry, nothing was found</Typography>
           )}
         </Box>
