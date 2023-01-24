@@ -1,4 +1,4 @@
-import React, { ReactElement, FC, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import {
   Box,
@@ -53,13 +53,26 @@ type FormValues = {
   SearchInput: string;
 };
 
-const Home: FC<any> = (): ReactElement => {
-  const [articles, setArticles] = useState<any[] | null>();
+type IArticle = {
+  events: [];
+  featured: boolean;
+  id: string;
+  imageUrl: string;
+  launches: [];
+  newsSite: string;
+  publishedAt: Date | string;
+  summary: string;
+  title: string;
+  updatedAt: Date | string;
+  url: string;
+};
+
+const Home = () => {
+  const [articles, setArticles] = useState<IArticle[] | null>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [searchData, setSearchData] = useState<any[] | null>();
+  const [searchData, setSearchData] = useState<IArticle[] | null>();
   const [term, setTerm] = useState('');
-  console.log(term);
 
   const { handleSubmit, control } = useForm<FormValues>();
 
@@ -102,8 +115,6 @@ const Home: FC<any> = (): ReactElement => {
     apiServices
       .getSearchArticles(term.SearchInput)
       .then(([arr1, arr2]) => {
-        console.log(arr1);
-        console.log(arr2);
         const titleArr = [...arr1.data];
         const summaryArr = [...arr2.data];
 

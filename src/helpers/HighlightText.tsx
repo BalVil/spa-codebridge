@@ -7,14 +7,11 @@ const HighlightText = ({
   result: string;
   query: string | undefined;
 }) => {
-  return <p>{getHighlightedText(result, query)}</p>;
+  return <span>{getHighlightedText(result, query)}</span>;
 };
 
 function getHighlightedText(text: string, higlight: string | undefined) {
-  console.log(higlight);
-
   const parts = text.split(new RegExp(`(${higlight})`, 'gi'));
-  console.log('Parts:', parts);
 
   return parts.map((part, index) => (
     <React.Fragment key={index}>
